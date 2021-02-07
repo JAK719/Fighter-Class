@@ -11,7 +11,7 @@ namespace Choose_Your_Class
         public CompFighter()
         {
             Random random = new Random();
-            Power = random.Next(125, 390);
+            Power = random.Next(125, 395);
 
         }
 

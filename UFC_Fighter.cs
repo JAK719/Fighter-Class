@@ -6,7 +6,8 @@ namespace Choose_Your_Class
 {
     public class Fighter
     {
-     public string Name { get; set; }
+     public string FirstName { get; set; }
+     public string LastName { get; set; }
      public string NickName { get; set; }
      public  int Weight { get; set; }
      public int Strength { get; set; }
@@ -15,10 +16,11 @@ namespace Choose_Your_Class
      public  int Striking { get; set; }
      public bool MakeWeight { get; set; }
      
-        public Fighter(string name, string nickName)
+        public Fighter(string firstName, string lastName, string nickName)
         {
             Random random = new Random();
-            Name = name;
+            FirstName = firstName;
+            LastName = lastName;
             NickName = nickName;
             Weight = random.Next(150, 250);
             Strength = random.Next(20, 35);
@@ -36,10 +38,11 @@ namespace Choose_Your_Class
 
         public void StrikeTraining(int value)
         {
+            Random random = new Random();
             if (Striking + value > 100)
                 Striking = 100;
             else
-                Striking = Striking + value;
+                Striking += value;
         }
 
         public void GrapplingTraining(int value)
@@ -48,7 +51,7 @@ namespace Choose_Your_Class
                 if (Grappling + value > 100)
                     Grappling = 100;
                 else
-                    Grappling = Grappling + value;
+                 Grappling += value;
             }
         }
 
@@ -58,7 +61,7 @@ namespace Choose_Your_Class
                 if (Strength + value > 100)
                     Strength = 100;
                 else
-                    Strength = Strength + value;
+                   Strength += value;
             }
         }
 
@@ -68,7 +71,7 @@ namespace Choose_Your_Class
                 if (Conditioning + value > 100)
                     Conditioning = 100;
                 else
-                    Conditioning = Conditioning + value;
+                    Conditioning += value;
             }
         }
         public void CutWeight(int value)
@@ -98,21 +101,9 @@ namespace Choose_Your_Class
 
     }
 
-    //public class CompFighter
-    //{
-    //   public int Power { get; set; }
 
 
-    //    public CompFighter()
-    //    {
-    //        Random compRandom = new Random();
-    //        Power = compRandom.Next(125, 390);
 
-    //    }
-
-    //}
-
-   
 
 
 }
