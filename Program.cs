@@ -4,7 +4,7 @@ namespace Choose_Your_Class
 {
     class Program
     {
-        private static Timer timer;
+        
         static void Main(string[] args)
         {
             // 
