@@ -4,25 +4,32 @@ namespace Choose_Your_Class
 {
     class Program
     {
+        private static Timer timer;
         static void Main(string[] args)
         {
             // 
-            Console.WriteLine("Weclome to the UFC!  Create your Fighter");
-            Console.WriteLine("What is your fighter's First Name?");
+            Console.WriteLine("Congratulations on earning your first UFC Contract!\n\nWe just have a few questions before you're on your way to the top.");
+            Console.Write("\nWhat is your fighter's First Name?  ");
             string firstName = Console.ReadLine();
-            Console.WriteLine($"Hey {firstName}!  What is your last name?");
+            Console.Write($"\nHey {firstName}!  What is your last name?  ");
             string lastName = Console.ReadLine();
-            Console.WriteLine($"Finally, {firstName} {lastName}, what is your nickname?");
+            Console.Write($"\nFinally, {firstName} {lastName}, what is your nickname?  ");
             string nickname = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine($"Welcome {firstName} '{nickname}' {lastName}, to the UFC! \n\nPress any key to continue to the locker room.");
             Fighter fighter = new Fighter(firstName, lastName, nickname);
+            Console.ReadKey();
             Console.Clear();
 
 
             
             while(true)
+
             {
-                Console.WriteLine($"Name:{fighter.FirstName} {fighter.LastName} | Nickname:{fighter.NickName} | Weight:{fighter.Weight} | Strength:{fighter.Strength} | Conditioning:{fighter.Conditioning} | Striking:{fighter.Striking} | Grappling:{fighter.Grappling}");
-                Console.WriteLine("What would you like to do?\n 1. Strength Training \n 2. Conditioning Training \n 3. Train Striking \n 4. Train Grappling \n 5. Cut Weight \n 6. Gain Weight \n 7. Fight!"  );
+                
+                fighter.AgeInYears = Convert.ToInt32(fighter.Age);
+                Console.WriteLine($"Name: {fighter.FirstName} {fighter.LastName} | Nickname: {fighter.NickName} | Age: {fighter.AgeInYears} |  Weight: {fighter.Weight} | \n\nStrength: {fighter.Strength}  \n\nConditioning: {fighter.Conditioning}  \n\nStriking: {fighter.Striking}  \n\nGrappling: {fighter.Grappling}\n");
+                Console.WriteLine("\nWelcome to the Locker Room!\n\nHow would you like to start your training?\n 1. Strength Training \n 2. Conditioning Training \n 3. Train Striking \n 4. Train Grappling \n 5. Cut Weight \n 6. Gain Weight \n 7. Fight!"  );
                 string input = Console.ReadLine();
                 Console.Clear();
 
@@ -31,7 +38,6 @@ namespace Choose_Your_Class
                     case "1":
                         Console.WriteLine("Choose your training method:\n 1. Push Ups \n 2. Free Weights \n 3. Tire Lift ");
                         string input2 = Console.ReadLine();
-                     
                         Random random1 = new Random();
                         if (input2 == "1")
                             fighter.StrengthTraining(random1.Next(1, 5));
@@ -40,12 +46,11 @@ namespace Choose_Your_Class
                         else if (input2 == "3")
                             fighter.StrengthTraining(random1.Next(11, 15));
                         if (fighter.Strength == 100)
-                            Console.WriteLine($"Your strength is already at {fighter.Strength}.  Go train something else. \nPress any key to retunr to the gym...");
-                        //else if (input2 <= 3 && input2 >= 1 && fighter.Strength < 100)
-                        //    Console.WriteLine($"Excellent Gains!  You're Strength is now up to {fighter.Strength}.  Keep on training and you'll be ready to make your Championship run!\nPress any key to return to the gym...");
-                        //else if(input2 < 1 && input2 > 3)
-                         else
-                             Console.WriteLine("Don't waste my time! \nIf you don't want to train press any key to return to the gym...");
+                            Console.WriteLine($"Your strength is already at {fighter.Strength}.  Go train something else. \nPress any key to retunr to the locker room...");
+                        if (fighter.Strength < 100 && input2 == "1" || input2 == "2" || input2 == "3")
+                            Console.WriteLine($"Excellent gains!  Your strength is now at {fighter.Strength}.  \nSoon you'll be ready for a Championship run. \nPress any key to return to the locker room.");
+                            else
+                        Console.WriteLine("Don't waste my time!  \nIf You dont want to train, get out of the gym...\nPress any key to return to the locker room");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -61,9 +66,11 @@ namespace Choose_Your_Class
                         else if (input3 == "3")
                             fighter.ConditionTraining(random2.Next(11, 15));
                         if (fighter.Conditioning == 100)
-                            Console.WriteLine($"Your conditioning is already at {fighter.Conditioning}.  Go train something else. \n Press any key to return to the gym...");
-                        else if (fighter.Conditioning < 100)
-                                Console.WriteLine($"Great Workout!  You're conditioning is now up to {fighter.Conditioning}.  Soon you'll be ready to fight into the Championship rounds! \nPress any key to return to the gym...");
+                            Console.WriteLine($"Your conditioning is already at {fighter.Conditioning}.  Go train something else. \n Press any key to return to the locker room...");
+                        if (fighter.Conditioning < 100 && input3 == "1" || input3 == "2" || input3 == "3")
+                                Console.WriteLine($"Great Workout!  Your conditioning is now up to {fighter.Conditioning}.  \nSoon you'll be ready to fight into the Championship rounds! \nPress any key to return to the locker room...");
+                        else
+                            Console.WriteLine("Don't waste my time!  \nIf You dont want to train, get out of the gym...\nPress any key to return to the locker room");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -72,16 +79,18 @@ namespace Choose_Your_Class
                         Console.WriteLine("Choose your training method:\n 1. Heavy Bag \n 2. Boxing \n 3. Kickboxing");
                         string input4 = Console.ReadLine();
                         Random random3 = new Random();
-                        if (input4 == "1")
+                        if (input4 == "1" )
                             fighter.StrikeTraining(random3.Next(1, 5));
                         else if (input4 == "2")
                             fighter.StrikeTraining(random3.Next(6, 10));
                         else if (input4 == "3")
                             fighter.StrikeTraining(random3.Next(11, 15));
                         if (fighter.Striking == 100)
-                            Console.WriteLine($"Your striking is already at {fighter.Striking}.  Go train something else. \nPress any key to return to the gym...");
-                        else if (fighter.Striking < 100)
-                                Console.WriteLine($"Great Session!  You're striking is now up to {fighter.Striking}.  Soon You'll be ready to swing with the best of them.\nPress any key to return to the gym...");
+                            Console.WriteLine($"Your striking is already at {fighter.Striking}.  Go train something else. \nPress any key to return to the locker room...");
+                        if (fighter.Striking < 100 && input4 == "1" || input4 == "2" || input4 == "3")
+                            Console.WriteLine($"Great Session!  Your striking is now up to {fighter.Striking}.  \nSoon You'll be ready to swing with the best of them.\nPress any key to return to the locker room...");
+                        else 
+                            Console.WriteLine("Don't waste my time!  \nIf You dont want to train, get out of the gym...\nPress any key to return to the locker room");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -97,9 +106,11 @@ namespace Choose_Your_Class
                         else if (input5 == "3")
                             fighter.GrapplingTraining(random4.Next(11, 15));
                         if (fighter.Grappling == 100)
-                            Console.WriteLine($"Your grappling is already at {fighter.Grappling}.  Go Train Something else. \nPress any key to return to the gym...");
-                        else if (fighter.Grappling < 100)
-                                Console.WriteLine($"Great Effort!  You're grappling is now up to {fighter.Grappling}.  You're on your way to getting even the highest level black belts to submit\nPress any key to return to the gym...");
+                            Console.WriteLine($"Your grappling is already at {fighter.Grappling}.  Go Train Something else. \nPress any key to return to the locker room...");
+                        if (fighter.Grappling < 100 && input5 == "1" || input5 == "2" || input5 == "3")
+                               Console.WriteLine($"Great Effort!  Your grappling is now up to {fighter.Grappling}.  \nYou're on your way to making even the highest level black belts to submit.\nPress any key to return to the gym...");
+                        else
+                            Console.WriteLine("Don't waste my time!  \nIf You dont want to train, get out of the gym...\nPress any key to return to the locker room.");
                         Console.ReadKey();
                         Console.Clear(); ;
                         break;
@@ -114,7 +125,10 @@ namespace Choose_Your_Class
                             fighter.CutWeight(random5.Next(6, 10));
                         else if (input6 == "3")
                             fighter.CutWeight(random5.Next(11, 15));
-                        Console.WriteLine($"You're Weight is now down to {fighter.Weight}\nPress any key to return to the gym...");
+                        if(input6 == "1" || input6 == "2" || input6 == "3")
+                            Console.WriteLine($"You're Weight is now down to {fighter.Weight}\nPress any key to return to the locker room...");
+                        else
+                            Console.WriteLine("If you're not committed to cutting weight then get out of my gym!\nPress any key to return to the locker room.");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -129,7 +143,10 @@ namespace Choose_Your_Class
                             fighter.GainWeight(random6.Next(6, 10));
                         else if (input7 == "3")
                             fighter.GainWeight(random6.Next(11, 15));
-                        Console.WriteLine($"You're weight is now up to {fighter.Weight}\nPress any key to return to the gym...");
+                        if (input7 == "1" || input7 == "2" || input7 == "3")
+                            Console.WriteLine($"You're weight is now up to {fighter.Weight}\nPress any key to return to the locker room...");
+                        else
+                            Console.WriteLine("You're not ready to move up in weight.\nPress any key to return to the locker room...");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -140,36 +157,20 @@ namespace Choose_Your_Class
                         Console.ReadKey();
                         Console.Clear();
                         if (fighter.Conditioning + fighter.Strength + fighter.Grappling + fighter.Striking >= compfighter.Power  && fighter.Striking > fighter.Grappling)
-                            Console.WriteLine($"You won by Knock Out! Congratulations to the new Champion {firstName} {nickname} {lastName}!\nPress any key to return to the gym...");
+                            Console.WriteLine($"You won by Knock Out! Congratulations to the new Champion {firstName} '{nickname}' {lastName}!\nPress any key to return to the gym...");
                        else if(fighter.Conditioning + fighter.Strength + fighter.Grappling + fighter.Striking >= compfighter.Power && fighter.Striking < fighter.Grappling)
-                            Console.WriteLine($"You won by Submission! Congratulations to the new Champion {firstName} {nickname} {lastName}!\nPress any key to return to the gym...");
+                            Console.WriteLine($"You won by Submission! Congratulations to the new Champion {firstName} '{nickname}' {lastName}!\nPress any key to return to the gym...");
                        else if (fighter.Conditioning + fighter.Strength + fighter.Grappling + fighter.Striking >= compfighter.Power  && fighter.Striking == fighter.Grappling)
-                            Console.WriteLine($"You won by Unanimous Decision! Congratulations to the new Champion {firstName} {nickname} {lastName}!\nPress any key to return to the gym...");
+                            Console.WriteLine($"You won by Unanimous Decision! Congratulations to the new Champion {firstName} '{nickname}' {lastName}!\nPress any key to return to the gym...");
                         else if (fighter.Conditioning + fighter.Strength + fighter.Grappling + fighter.Striking < compfighter.Power)
                             Console.WriteLine("You lost this time, keep training and try again. \nPress Any Key To Get Back In The Gym...");
                         Console.ReadKey();
                         Console.Clear();
                         break;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 }
+                fighter.Tick();
+
 
             }
 

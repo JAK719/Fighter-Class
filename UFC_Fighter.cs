@@ -15,6 +15,8 @@ namespace Choose_Your_Class
      public   int Grappling { get; set; }
      public  int Striking { get; set; }
      public bool MakeWeight { get; set; }
+     public double Age { get; set; }
+     public int AgeInYears { get; set; }
      
         public Fighter(string firstName, string lastName, string nickName)
         {
@@ -27,6 +29,7 @@ namespace Choose_Your_Class
             Conditioning = random.Next(15, 30);
             Grappling = random.Next(20, 45);
             Striking = random.Next(25, 50);
+            Age = random.Next(21, 28);
             if (Weight < 200)
             {
                 MakeWeight = true;
@@ -95,6 +98,15 @@ namespace Choose_Your_Class
             MakeWeight = false;
             return MakeWeight;
         }
+
+        public void Tick()
+        {
+            Random random = new Random();
+            Weight += random.Next(1,5);
+            Conditioning -= random.Next(1,5);
+            Age += .25;
+        }
+
    
 
 
